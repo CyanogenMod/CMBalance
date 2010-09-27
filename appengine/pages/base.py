@@ -34,4 +34,9 @@ class BasePage(webapp.RequestHandler):
 
     def render(self, values={}):
         tpl = self._getTemplate()
-        self.response.out.write(template.render(tpl, values))
+
+        content = template.render(tpl, values)
+        content = content.replace('\n', '')
+        content = content.replace('\t', '')
+
+        self.response.out.write(content)
