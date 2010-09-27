@@ -1,0 +1,36 @@
+div.container {
+	margin-top: 10px;
+}
+
+/* navigation */
+div#navigation {
+	border:1px solid #DDE0D5;
+	padding: 5px;
+	font-weight: bold;
+	color: #000000;
+}
+
+div#navigation a {
+	font-weight: bold;
+	color: #77921F;
+	text-decoration: none;
+}
+
+/* table */
+tbody tr:nth-child(even) td, tbody tr.even td { background: #FFFFFF;}
+tbody tr:nth-child(odd) td, tbody tr.odd td { background: #DDE0D5;}
+div#table table {
+	border:1px solid #DDE0D5;
+}
+
+div#table table tr th {
+	background-color: #B5D05E;
+}
+
+div#table table tr td a {
+	text-decoration: none;
+}
+
+div#table table tr td img {
+	vertical-align: text-bottom;
+}

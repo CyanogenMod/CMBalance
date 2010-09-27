@@ -1,0 +1,35 @@
+{% extends "../base.html" %}
+
+{% block content %}
+<div class="span-7 append-1">
+	<div id="navigation">
+		<a href="#">Recent Files</a>
+		<br/>
+		By Device
+		<br/>
+		
+	</div>
+</div>
+<div class="span-15">
+	<div id="table">
+		<table>
+			<tr>
+				<th>Device</th>
+				<th>Type</th>
+				<th>Filename</th>
+				<th>Date Added</th>
+			</tr>
+			{% for file in files %}
+			<tr>
+				<td>{{ file.device }}</td>
+				<td>{{ file.type }}</td>
+				<td>
+					<a href="#" style="padding-right: 10px;">{{ file.filename }}</a>
+					<img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
+					</td>
+				<td>{{ file.date_created }}</td>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+{% endblock %}
