@@ -1,0 +1,18 @@
+	<div id="navigation">
+	<ul>
+		<li><a href="/">Recent Files</a></li>
+		<li>&nbsp;</li>
+		<li>By Device</li>
+		{% for device in devices %}
+		<li class="bullet"><a href="/?device={{ device }}">{{ device|escape }}</a></li>
+		{% endfor %}
+		<li>&nbsp;</li>
+		<li>By Type</li>
+		{% for type in types %}
+		<li class="bullet"><a href="/?type={{ type }}">{{ type|escape }}</a></li>
+		{% endfor %}
+		<li>&nbsp;</li>
+		<li>Mirrors</li>
+		<li class="bullet"><a href="/mirrors">list</a></li>
+	</ul>
+	</div>

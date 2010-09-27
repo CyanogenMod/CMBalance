@@ -16,5 +16,8 @@ handlers:
 - url: /
   script: pages/browse.py
   
+- url: /mirrors
+  script: pages/mirrors.py
+  
 - url: /static
   static_dir: static

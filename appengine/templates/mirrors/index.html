@@ -1,0 +1,33 @@
+{% extends "../base.html" %}
+
+{% block content %}
+<div class="span-4 append-1">
+{% include "../nav.html" %}
+</div>
+<div class="span-18">
+	<div id="table">
+		<table>
+			<tr>
+				<th width="16"></th>
+				<th>Mirror Name</th>
+				<th>Last Seen</th>
+			</tr>
+			<tr>
+				<td><img src="/static/icons/accept.png" alt="Online" /></td>
+				<td>Testing</td>
+				<td>Today</td>
+			</tr>
+			<tr>
+				<td><img src="/static/icons/exclamation.png" alt="Offline" /></td>
+				<td>EugeneKay</td>
+				<td>Yesterday</td>
+			</tr>
+			<tr>
+				<td><img src="/static/icons/error.png" alt="Out of Sync" /></td>
+				<td>Chemlab</td>
+				<td>Today</td>
+			</tr>
+		</table>
+	</div>
+</div>
+{% endblock %}
