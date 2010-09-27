@@ -16,6 +16,10 @@ div#navigation a {
 	text-decoration: none;
 }
 
+div#navigation a:hover {
+	color: orange;
+}
+
 div#navigation ul {
 	list-style-type: none;
 	margin: 0px;
