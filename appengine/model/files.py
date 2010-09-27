@@ -3,9 +3,11 @@ from google.appengine.ext import db
 from model.base import BaseModel
 
 class File(BaseModel):
-    type = db.StringProperty(required=True)
-    device = db.StringProperty(required=True)
-    filename = db.StringProperty(required=True)
+    type = db.StringProperty()
+    device = db.StringProperty()
+    filename = db.StringProperty()
+    path = db.StringListProperty()
+    size = db.IntegerProperty()
     date_created = db.DateTimeProperty(auto_now_add=True)
 
     @classmethod

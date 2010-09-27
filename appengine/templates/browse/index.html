@@ -4,14 +4,14 @@
 <div class="span-4 append-1">
 	<div id="navigation">
 	<ul>
-		<li><a href="#">Recent Files</a></li>
+		<li><a href="/">Recent Files</a></li>
 		<li>By Device</li>
 		{% for device in devices %}
-		<li class="bullet"><a href="/?device={{ device }}">{{ device }}</a></li>
+		<li class="bullet"><a href="/?device={{ device }}">{{ device|escape }}</a></li>
 		{% endfor %}
 		<li>By Type</li>
 		{% for type in types %}
-		<li class="bullet"><a href="/?type={{ type }}">{{ type }}</a></li>
+		<li class="bullet"><a href="/?type={{ type }}">{{ type|escape }}</a></li>
 		{% endfor %}
 	</ul>
 	</div>
@@ -23,17 +23,20 @@
 				<th>Device</th>
 				<th>Type</th>
 				<th>Filename</th>
+				<th>Size</th>
 				<th>Date Added</th>
 			</tr>
 			{% for file in files %}
 			<tr>
-				<td>{{ file.device }}</td>
-				<td>{{ file.type }}</td>
+				<td>{{ file.device|escape }}</td>
+				<td>{{ file.type|escape }}</td>
 				<td>
-					<a href="#" style="padding-right: 10px;">{{ file.filename }}</a>
+					<a href="/get/{{ file.device }}/{{ file.filename }}" style="padding-right: 10px;">{{ file.filename }}</a>
 					<img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
-					</td>
+				</td>
+				<td>{{ file.size|filesizeformat }}</td>
 				<td>{{ file.date_created }}</td>
+			</tr>
 			{% endfor %}
 		</table>
 	</div>
