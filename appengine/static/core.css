@@ -1,5 +1,5 @@
 div.container {
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 /* navigation */
@@ -26,10 +26,23 @@ div#navigation ul li {
 	margin: 0 0 5px 0;
 }
 
+div#navigation ul li.break {
+	margin: 10px 0 0px 0;
+}
+
 div#navigation ul li.bullet {
 	background: url('/static/icons/bullet_black.png') no-repeat left;
 	padding: 0 0 0 20px;
 	margin: 2px 0 2px 0;
+}
+
+div#subnav {
+	font-size: 90%;
+	margin-bottom: 5px;
+}
+
+div#subnav a {
+	text-decoration: none;	
 }
 
 /* table */
@@ -41,6 +54,7 @@ div#table table {
 
 div#table table tr th {
 	background-color: #B5D05E;
+	font-size: 95%;
 }
 
 div#table table tr td a {
@@ -48,5 +62,9 @@ div#table table tr td a {
 }
 
 div#table table tr td img {
+	vertical-align: text-bottom;
+}
+
+div#table table tr th img {
 	vertical-align: text-bottom;
 }

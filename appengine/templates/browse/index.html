@@ -6,13 +6,17 @@
 </div>
 <div class="span-18">
 	<div id="table">
+		<h3>Browse Files</h3>
+		<div id="subnav">
+			<b>Show Only:</b> [ <a href="#">stable</a> | <a href="#">nightly</a> ]
+		</div>
 		<table>
 			<tr>
 				<th>Device</th>
 				<th>Type</th>
 				<th>Filename</th>
 				<th>Size</th>
-				<th>Date Added</th>
+				<th>Date Added <img src="/static/icons/bullet_arrow_down.png" alt="" /></th>
 			</tr>
 			{% for file in files %}
 			<tr>
