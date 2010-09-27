@@ -1,16 +1,18 @@
 {% extends "../base.html" %}
 
 {% block content %}
-<div class="span-7 append-1">
+<div class="span-4 append-1">
 	<div id="navigation">
-		<a href="#">Recent Files</a>
-		<br/>
-		By Device
-		<br/>
-		
+	<ul>
+		<li><a href="#">Recent Files</a></li>
+		<li>By Device</li>
+		{% for device in devices %}
+		<li class="bullet"><a href="#">{{ device }}</a></li>
+		{% endfor %}
+	</ul>
 	</div>
 </div>
-<div class="span-15">
+<div class="span-18">
 	<div id="table">
 		<table>
 			<tr>

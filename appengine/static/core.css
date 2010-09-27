@@ -16,6 +16,22 @@ div#navigation a {
 	text-decoration: none;
 }
 
+div#navigation ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+div#navigation ul li {
+	margin: 0 0 5px 0;
+}
+
+div#navigation ul li.bullet {
+	background: url('/static/icons/bullet_black.png') no-repeat left;
+	padding: 0 0 0 20px;
+	margin: 2px 0 2px 0;
+}
+
 /* table */
 tbody tr:nth-child(even) td, tbody tr.even td { background: #FFFFFF;}
 tbody tr:nth-child(odd) td, tbody tr.odd td { background: #DDE0D5;}

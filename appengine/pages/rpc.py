@@ -18,7 +18,7 @@ class RPCHandler(webapp.RequestHandler):
             return True
 
         if key:
-            m = Mirror.cache(key)
+            m = Mirror.cache(key=key)
             if m.ip == self.request.remote_addr:
                 return self._checkEnabled()
 
@@ -27,7 +27,7 @@ class RPCHandler(webapp.RequestHandler):
     def _checkEnabled(self):
         key = self.request.get('key')
         if key:
-            m = Mirror.cache(key)
+            m = Mirror.cache(key=key)
             if m.enabled:
                 return True
 
@@ -68,7 +68,7 @@ class RPCHandler(webapp.RequestHandler):
 
     def heartbeat(self):
         key = self.request.get('key')
-        m = Mirror.cache(key)
+        m = Mirror.cache(key=key)
         m.put()
         self.response.out.write("pong")
 
