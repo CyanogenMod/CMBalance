@@ -7,11 +7,11 @@
 		<li><a href="#">Recent Files</a></li>
 		<li>By Device</li>
 		{% for device in devices %}
-		<li class="bullet"><a href="#">{{ device }}</a></li>
+		<li class="bullet"><a href="/?device={{ device }}">{{ device }}</a></li>
 		{% endfor %}
 		<li>By Type</li>
 		{% for type in types %}
-		<li class="bullet"><a href="#">{{ type }}</a></li>
+		<li class="bullet"><a href="/?type={{ type }}">{{ type }}</a></li>
 		{% endfor %}
 	</ul>
 	</div>

@@ -9,8 +9,19 @@ class BrowsePage(BasePage):
         return self._handlePage("index")
 
     def index(self):
+        type = self.request.get('type', None)
+        device = self.request.get('device', None)
+
+        files = File.all()
+
+        if type:
+            files = files.filter('type =', type)
+
+        if device:
+            files = files.filter('device =', device)
+
         values = {
-            'files': File.all().order('-date_created').fetch(limit=30),
+            'files': files.order('-date_created').fetch(limit=30),
             'devices': Constants.cache(key_name='devices'),
             'types': Constants.cache(key_name='types'),
         }
