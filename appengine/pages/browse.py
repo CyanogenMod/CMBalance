@@ -11,7 +11,8 @@ class BrowsePage(BasePage):
     def index(self):
         values = {
             'files': File.all().order('-date_created').fetch(limit=30),
-            'devices': Constants.cache(key_name='devices').all().get().value,
+            'devices': Constants.cache(key_name='devices'),
+            'types': Constants.cache(key_name='types'),
         }
         self.render(values)
 

@@ -16,12 +16,14 @@ class BaseModel(db.Model):
                 logging.debug("(%s.cache) hit for %s" % (cls.__name__, key))
 
             return obj
+
         if key_name:
             key = cls.__name__ + "_" + key_name
             obj = memcache.get(key)
             if not obj:
                 logging.debug("(%s.cache) miss for %s" % (cls.__name__, key))
                 obj = cls.get_by_key_name(key_name)
+                logging.debug(obj.key().name())
                 memcache.set(key, obj, 60)
             else:
                 logging.debug("(%s.cache) hit for %s" % (cls.__name__, key))
@@ -51,3 +53,8 @@ class BaseModel(db.Model):
 
 class Constants(BaseModel):
     value = db.StringListProperty()
+
+    @classmethod
+    def cache(cls, key=None, key_name=None):
+        obj = super(Constants, cls).cache(key=key, key_name=key_name)
+        return obj.value
