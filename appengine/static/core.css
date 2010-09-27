@@ -4,6 +4,7 @@ div.container {
 
 /* navigation */
 div#navigation {
+	background: #fcfcfc;
 	border:1px solid #DDE0D5;
 	padding: 5px;
 	font-weight: bold;
@@ -50,7 +51,7 @@ div#subnav a {
 }
 
 /* table */
-tbody tr:nth-child(even) td, tbody tr.even td { background: #FFFFFF;}
+tbody tr:nth-child(even) td, tbody tr.even td { background: #f7f7f7;}
 tbody tr:nth-child(odd) td, tbody tr.odd td { background: #DDE0D5;}
 div#table table {
 	border:1px solid #DDE0D5;
