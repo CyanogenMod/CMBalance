@@ -21,8 +21,8 @@
 				<td>{{ file.device|escape }}</td>
 				<td>{{ file.type|escape }}</td>
 				<td>
+                    <img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
 					<a href="/get/{{ file.device }}/{{ file.filename }}" style="padding-right: 10px;">{{ file.filename }}</a>
-					<img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
 				</td>
 				<td>{{ file.size|filesizeformat }}</td>
 				<td>{{ file.date_created }}</td>

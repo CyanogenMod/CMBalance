@@ -48,7 +48,7 @@ def generateMirrorHits():
 def checkMirrorHitsLength():
     mh = memcache.get('mirror_hits')
     if mh is None:
-        mh = 0
+        mh = []
     mirrors_count = Mirror.all().filter('enabled =', True).count()
     mirror_hits = len(mh)
 

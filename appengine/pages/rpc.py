@@ -4,6 +4,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from model.files import File
 from model.mirrors import Mirror
 from pages.base import BasePage
+import datetime
 
 class RPCHandler(BasePage):
     blacklist = ['get', 'post']
@@ -48,8 +49,8 @@ class RPCHandler(BasePage):
             'device': self.request.get('device', None),
             'filename': self.request.get('filename', None),
             'path': self.request.get('path', None),
-            'date_created': self.request.get('date_created'),
-            'size': self.request.get('size'),
+            'date_created': datetime.datetime.fromtimestamp(float(self.request.get('date_created', None))),
+            'size': int(self.request.get('size', None)),
         }
 
         for value in values.itervalues():

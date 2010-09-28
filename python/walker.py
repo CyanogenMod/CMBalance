@@ -43,7 +43,7 @@ def createRecord(build):
     values = urllib.urlencode(values)
 
     url = "http://cmbalance.appspot.com/rpc?%s" % values
-    #urllib.urlopen(url).read()
+    urllib.urlopen(url).read()
     print url
 
     print "Adding %s" % filename
