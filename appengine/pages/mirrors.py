@@ -1,4 +1,3 @@
-from model.base import Constants
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from pages.base import BasePage
@@ -8,10 +7,7 @@ class MirrorsPage(BasePage):
         return self._handlePage("index")
 
     def index(self):
-        values = {
-            'devices': Constants.cache(key_name='devices'),
-            'types': Constants.cache(key_name='types'),
-        }
+        values = self.values
         self.render(values)
 
 def main():

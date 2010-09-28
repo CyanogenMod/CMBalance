@@ -6,7 +6,7 @@ class File(BaseModel):
     type = db.StringProperty()
     device = db.StringProperty()
     filename = db.StringProperty()
-    path = db.StringListProperty()
+    path = db.StringProperty()
     size = db.IntegerProperty()
     date_created = db.DateTimeProperty(auto_now_add=True)
 

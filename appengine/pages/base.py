@@ -5,6 +5,19 @@ import os.path
 import re
 
 class BasePage(webapp.RequestHandler):
+    values = {
+        'devices': ['bravo', 'dream_sapphire', 'espresso', 'hero', 'heroc', 'inc', 'liberty', 'passion', 'sholes', 'supersonic'],
+        'types': ['stable', 'nightly'],
+    }
+
+    def _denyAccess(self):
+        self.error(403)
+        self.response.out.write("403 - Access Denied")
+
+    def _invalidRequest(self):
+        self.error(400)
+        self.response.out.write("400 - Bad Request")
+
     def _getTemplate(self):
         cls = self.__class__.__name__
         folder = re.match("^(.*)Page$", cls)

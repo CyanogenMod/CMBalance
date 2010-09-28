@@ -1,6 +1,5 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from model.base import Constants
 from model.files import File
 from pages.base import BasePage
 
@@ -26,23 +25,11 @@ class BrowsePage(BasePage):
         if device and type:
             title = "Browse Files - %s / %s" % (device, type)
 
-        #devices = Constants.cache(key_name='devices')
-        devices = None
-        if not devices:
-            devices = ['sholes', 'passion']
-
-        #types = Constants.cache(key_name='types')
-        types = None
-        if not types:
-            types = ['stable', 'nightly']
-
-        values = {
+        values = self.values
+        values.update({
             'files': files.order('-date_created').fetch(limit=30),
-            'devices': devices,
-            'types': types,
-
             'title': title,
-        }
+        })
         self.render(values)
 
 def main():

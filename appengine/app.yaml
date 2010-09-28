@@ -16,6 +16,9 @@ handlers:
 - url: /
   script: pages/browse.py
   
+- url: /get/.*
+  script: pages/get.py
+  
 - url: /mirrors
   script: pages/mirrors.py
   

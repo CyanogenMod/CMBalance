@@ -3,8 +3,9 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model.files import File
 from model.mirrors import Mirror
+from pages.base import BasePage
 
-class RPCHandler(webapp.RequestHandler):
+class RPCHandler(BasePage):
     blacklist = ['get', 'post']
 
     def _checkAccess(self):
@@ -33,14 +34,6 @@ class RPCHandler(webapp.RequestHandler):
 
         return False
 
-    def _denyAccess(self):
-        self.error(403)
-        self.response.out.write("403 - Access Denied")
-
-    def _invalidRequest(self):
-        self.error(400)
-        self.response.out.write("400 - Bad Request")
-
     def _processRequest(self):
         action = self.request.get('action')
         try:
@@ -54,6 +47,9 @@ class RPCHandler(webapp.RequestHandler):
             'type': self.request.get('type', None),
             'device': self.request.get('device', None),
             'filename': self.request.get('filename', None),
+            'path': self.request.get('path', None),
+            'date_created': self.request.get('date_created'),
+            'size': self.request.get('size'),
         }
 
         for value in values.itervalues():
@@ -65,6 +61,21 @@ class RPCHandler(webapp.RequestHandler):
             file.put()
         except DuplicateRecordException:
             self._invalidRequest()
+
+    def addMirror(self):
+        values = {
+            'owner': self.request.get('owner', None),
+            'url': self.request.get('url', None),
+            'ip': self.request.get('ip', None),
+            'control_type': self.request.get('control_type', None),
+        }
+
+        for value in values.itervalues():
+            if value is None:
+                return self._invalidRequest()
+
+        mirror = Mirror(**values)
+        mirror.put()
 
     def heartbeat(self):
         key = self.request.get('key')
