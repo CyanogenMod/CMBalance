@@ -26,10 +26,20 @@ class BrowsePage(BasePage):
         if device and type:
             title = "Browse Files - %s / %s" % (device, type)
 
+        #devices = Constants.cache(key_name='devices')
+        devices = None
+        if not devices:
+            devices = ['sholes', 'passion']
+
+        #types = Constants.cache(key_name='types')
+        types = None
+        if not types:
+            types = ['stable', 'nightly']
+
         values = {
             'files': files.order('-date_created').fetch(limit=30),
-            'devices': Constants.cache(key_name='devices'),
-            'types': Constants.cache(key_name='types'),
+            'devices': devices,
+            'types': types,
 
             'title': title,
         }
