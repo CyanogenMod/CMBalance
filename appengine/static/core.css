@@ -73,6 +73,7 @@ div#table table tr td a {
 }
 
 div#table table tr td img {
+	padding-right: 5px;
 	vertical-align: text-bottom;
 }
 

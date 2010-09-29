@@ -1,4 +1,5 @@
 from exc import DuplicateRecordException
+from google.appengine.api.labs import taskqueue
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model.files import File
@@ -62,6 +63,8 @@ class RPCHandler(BasePage):
             file.put()
         except DuplicateRecordException:
             self._invalidRequest()
+
+        taskqueue.add(url='/tasks/notify_mirrors', method='get')
 
     def addMirror(self):
         values = {

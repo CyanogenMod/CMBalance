@@ -2,6 +2,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model.files import File
 from pages.base import BasePage
+import urllib
 
 class BrowsePage(BasePage):
     def get(self):
@@ -11,6 +12,8 @@ class BrowsePage(BasePage):
         type = self.request.get('type', None)
         device = self.request.get('device', None)
         title = "Recent Files"
+        link_nightly = {'type': 'nightly'}
+        link_stable = {'type': 'stable'}
 
         files = File.all()
 
@@ -21,6 +24,8 @@ class BrowsePage(BasePage):
         if device:
             files = files.filter('device =', device)
             title = 'Browse Files - %s' % device
+            link_stable.update({'device': device})
+            link_nightly.update({'device': device})
 
         if device and type:
             title = "Browse Files - %s / %s" % (device, type)
@@ -29,6 +34,8 @@ class BrowsePage(BasePage):
         values.update({
             'files': files.order('-date_created').fetch(limit=30),
             'title': title,
+            'link_nightly': "/?" + urllib.urlencode(link_nightly),
+            'link_stable': "/?" + urllib.urlencode(link_stable),
         })
         self.render(values)
 
