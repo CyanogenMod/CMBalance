@@ -4,13 +4,15 @@ CMBalance
 Python Client
 -------------
 
-Features:
+## Features
 * Allows CMBalance server to request a sync.
 * Tells CMBalance server whether or not a file exists locally.
 
-Setup:
-* Create a configuration file at ~/.cmbalanceconf.  An example configuration file is included, please see "example-conf".
+## Setup
+* Create a configuration file at ~/.cmbalanceconf.
+* An example configuration file is included, please see "example-conf".
 
 Run the following commands as root:
-* python setup.py install
-* cmbalance
+
+    python setup.py install
+    cmbalance
