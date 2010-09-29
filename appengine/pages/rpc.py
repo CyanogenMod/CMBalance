@@ -75,6 +75,12 @@ class RPCHandler(BasePage):
             'url': self.request.get('url', None),
             'ip': self.request.get('ip', None),
             'control_type': self.request.get('control_type', None),
+            'date_added': datetime.datetime.now(),
+            'link': self.request.get('link', 'http://www.cyanogenmod.com/'),
+            'name': self.request.get('name', None),
+            'status': 'offline',
+            'enabled': True,
+            'last_seen': datetime.datetime.now(),
         }
 
         for value in values.itervalues():

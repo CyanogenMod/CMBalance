@@ -17,7 +17,12 @@
 			</tr>
             {% for mirror in mirrors %}
 			<tr>
-                <td><img src="/static/icons/{{ mirror.icon }}" alt="Offline" /></td>
+                {% ifequal mirror.status "online" %}
+                <td><img src="/static/icons/accept.png" alt="Online" /></td>
+                {% endifequal %}
+                {% ifequal mirror.status "offline" %}
+                <td><img src="/static/icons/exclamation.png" alt="Offline" /></td>
+                {% endifequal %}
 				<td>{{ mirror.name }}</td>
                 <td><a href="{{ mirror.link }}">{{ mirror.owner }}</a></td>
 				<td>{{ mirror.last_seen }}</td>

@@ -14,12 +14,13 @@ class MirrorsPage(BasePage):
         for mirror in mirrors:
             if mirror.link is None:
                 mirror.link = "http://mirror.teamdouche.net/mirrors"
-                if mirror.status == "offline":
-                    mirror.icon = "exclamation.png"
-                if mirror.status == "online":
-                    mirror.icon = "accept.png"
 
             hits = MirrorHits.get_by_key_name(str(mirror.key()))
+            if hits is None:
+                hits = MirrorHits(key_name=str(mirror.key()))
+                hits.count = 0
+                hits.put()
+
             mirror.hits = hits.count
 
         values.update({
