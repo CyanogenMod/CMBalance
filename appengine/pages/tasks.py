@@ -1,8 +1,10 @@
+from google.appengine.api import urlfetch
 from google.appengine.api.labs import taskqueue
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model.mirrors import Mirror
 from pages.base import BasePage
+from utils.xmlrpc import GAEXMLRPCTransport
 import datetime
 import logging
 import re
@@ -26,7 +28,7 @@ class TasksPage(BasePage):
     def _notify_python_mirror(self):
         ip = self.request.get('ip')
         try:
-            s = xmlrpclib.Server("http://%s:49150" % ip)
+            s = xmlrpclib.ServerProxy("http://%s:49150" % ip, GAEXMLRPCTransport())
             s.sync()
         except:
             pass
@@ -69,16 +71,13 @@ class PingMirrors(webapp.RequestHandler):
             return self._python_ping(key, ip)
 
     def _python_ping(self, key, ip):
-        s = xmlrpclib.Server("http://%s:49150" % ip)
-        try:
-            pong = s.ping()
-            logging.debug("PONG: Got '%s' from %s" % (pong, ip))
-            if pong == "pong":
-                online = True
-            else:
-                online = False
-        except Exception, e:
-            logging.debug("PONG: Got Exception: %s" % (e))
+        online = False
+
+        rpc_server = xmlrpclib.ServerProxy("http://%s:49150" % ip, GAEXMLRPCTransport())
+        result = rpc_server.ping()
+        if result == "pong":
+            online = True
+        else:
             online = False
 
         # Update Mirror

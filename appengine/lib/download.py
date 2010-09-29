@@ -40,7 +40,7 @@ def getNextMirror(type, path):
 
     # Make sure the mirror has the requested file.
     try:
-        s = xmlrpclib.Server("http://%s:49150" % mirror.ip)
+        s = xmlrpclib.ServerProxy("http://%s:49150" % mirror.ip, GAEXMLRPCTransport())
         fileExists = s.fileExists(type, path)
     except:
         fileExists = False
