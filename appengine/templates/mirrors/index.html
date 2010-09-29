@@ -18,10 +18,13 @@
             {% for mirror in mirrors %}
 			<tr>
                 {% ifequal mirror.status "online" %}
-                <td><img src="/static/icons/accept.png" alt="Online" /></td>
+                <td><img src="/static/icons/accept.png" title="Online" alt="Online" /></td>
                 {% endifequal %}
                 {% ifequal mirror.status "offline" %}
-                <td><img src="/static/icons/exclamation.png" alt="Offline" /></td>
+                <td><img src="/static/icons/exclamation.png" title="Offline" alt="Offline" /></td>
+                {% endifequal %}
+                {% ifequal mirror.status "sync" %}
+                <td><img src="/static/icons/error.png" title="Out of Sync" alt="Out of Sync" /></td>
                 {% endifequal %}
 				<td>{{ mirror.name }}</td>
                 <td><a href="{{ mirror.link }}">{{ mirror.owner }}</a></td>

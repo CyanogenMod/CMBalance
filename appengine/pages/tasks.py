@@ -5,6 +5,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from model.mirrors import Mirror
 from pages.base import BasePage
 import datetime
+import logging
 import re
 
 class TasksPage(BasePage):
@@ -59,11 +60,11 @@ class PingMirrors(webapp.RequestHandler):
         key = self.request.get('key')
         control_type = self.request.get('control_type')
 
-        if control_type == "python":
-            return self._python_ping(key, url)
+        return self._python_ping(key, url)
 
     def _python_ping(self, key, url):
         url = url + "/ping.html"
+        logging.debug("Pinging %s" % url)
         result = urlfetch.fetch(url)
         if result.status_code == 200:
             online = True
@@ -76,11 +77,13 @@ class PingMirrors(webapp.RequestHandler):
             mirror.status = "online"
             mirror.last_seen = datetime.datetime.now()
             mirror.enabled = True
+            mirror.put()
+            logging.debug("Flagging %s online" % key)
         else:
             mirror.status = "offline"
             mirror.enabled = False
-
-        mirror.put()
+            mirror.put()
+            logging.debug("Flagging %s offline" % key)
 
 routes = [
     ('^/tasks/ping_mirrors$', PingMirrors),

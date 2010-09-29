@@ -1,4 +1,4 @@
 cron:
 - description: ping mirrors
   url: /tasks/ping_mirrors
-  schedule: every 30 minutes
+  schedule: every 10 minutes

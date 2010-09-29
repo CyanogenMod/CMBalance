@@ -1,4 +1,4 @@
-from google.appengine.api import memcache
+from google.appengine.api import memcache, urlfetch
 from google.appengine.api.labs import taskqueue
 from model.files import File
 from model.mirrors import Mirror, MirrorHits
@@ -15,7 +15,7 @@ def getDownloadURL(device, filename):
         memcache.set("file_%s_%s" % (device, filename), file, 60)
 
     # Figure out the next mirror in the round robin.
-    mirror = getNextMirror(file.type, file.path)
+    mirror = getNextMirror(file.type + "/" + file.path)
 
     url = urlparse.urlunparse((
                 mirror.scheme,
@@ -26,31 +26,43 @@ def getDownloadURL(device, filename):
                 mirror.fragment))
     return url
 
-def getNextMirror(type, path):
+def getNextMirror(path):
     mirror_hits = generateMirrorHits()
     mirror_hits.sort()
 
     # Update hit count.
     mirror_hits[0][0] += 1
-    memcache.set('mirror_hits', mirror_hits, 60)
+    memcache.set('mirror_hits', mirror_hits, 3600)
 
     # Load mirror object.
     mirror = Mirror.get(mirror_hits[0][1])
 
     # Make sure the mirror has the requested file.
-    fileExists = True
+    url = mirror.url + "/cmbalance.php?action=fileExists&file=%s" % path
+    logging.debug("Asking  %s" % url)
+    result = urlfetch.fetch(url)
+    if result.status_code == 200:
+        fileExists = True
+        if mirror.status != "online":
+            mirror.status = "online"
+            mirror.put()
+    else:
+        fileExists = False
+        if mirror.status != "sync":
+            mirror.status = "sync"
+            mirror.put()
 
     if fileExists:
         # All is well, return this mirror.
         MirrorHits.increment(str(mirror.key()))
-        logging.debug("%s HAS %s/%s" % (mirror.ip, type, path))
+        logging.debug("%s HAS %s" % (mirror.ip, path))
         return urlparse.urlparse(mirror.url)
     else:
         # Mirror says it doesn't have the file!
         # Tell them all to sync, and move to the next mirror.
-        logging.debug("%s does not have %s/%s!" % (mirror.ip, type, path))
+        logging.debug("%s does not have %s!" % (mirror.ip, path))
         taskqueue.add(url='/tasks/notify_mirrors', method='get')
-        return getNextMirror(type, path)
+        return getNextMirror(path)
 
 def generateMirrorHits():
     mirror_hits = memcache.get('mirror_hits')
@@ -61,10 +73,13 @@ def generateMirrorHits():
         for mirror in mirrors:
             mirror_hits.append([0, str(mirror.key())])
 
-        memcache.set('mirror_hits', mirror_hits, 60)
+        memcache.set('mirror_hits', mirror_hits, 3600)
     else:
+        logging.debug("Cache hit on generateMirrorHits.")
         # Check for new mirrors
         mc = Mirror.all().filter('enabled =', True).count()
+        logging.debug("mc = %s" % mc)
+        logging.debug("len(mirror_hits) = %s" % len(mirror_hits))
         if len(mirror_hits) != mc:
             # clear cache and run this function again
             memcache.set('mirror_hits', None, 60)
