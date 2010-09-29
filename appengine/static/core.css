@@ -1,5 +1,13 @@
-div.container {
-	margin-top: 20px;
+body {
+	background: #FFFFFF url('/static/bg.png') repeat-x top left;
+}
+
+/* header */
+div#header {
+	margin-bottom: 20px;
+}
+div#header h2 {
+	
 }
 
 /* navigation */

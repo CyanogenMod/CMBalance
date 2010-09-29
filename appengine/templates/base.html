@@ -1,14 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
 	<head>
-		<title>{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection"> 
     	<link rel="stylesheet" href="/static/blueprint/print.css" type="text/css" media="print"> 
     	<!--[if lt IE 8]><link rel="stylesheet" href="/static/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    	<link rel="stylesheet" href="/static/core.css" type="text/css" media="screen">  
+    	<link rel="stylesheet" href="/static/core.css" type="text/css" media="screen">
+        
+        <title>TeamDouche Mirror System</title>  
 	</head>
 	<body>
 		<div class="container">
+            <div class="span-24 last">
+                <div id="header">
+                    <img src="/static/logo.png" />
+                </div>
+            </div>
 			{% block content %}{% endblock %}
 		</div>
 	</body>

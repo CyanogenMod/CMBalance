@@ -18,11 +18,6 @@ class GetPage(BasePage):
 
 class TicklePage(BasePage):
     def get(self):
-        success = self.request.get('success')
-
-        values = {
-            'success': success
-        }
         self.redirect('/', True)
 
 routes = [

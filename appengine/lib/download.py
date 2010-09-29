@@ -1,7 +1,7 @@
 from google.appengine.api import memcache
 from google.appengine.api.labs import taskqueue
 from model.files import File
-from model.mirrors import Mirror
+from model.mirrors import Mirror, MirrorHits
 import logging
 import os.path
 import urlparse
@@ -17,6 +17,7 @@ def getDownloadURL(device, filename):
 
     # Figure out the next mirror in the round robin.
     mirror = getNextMirror(file.type, file.path)
+
     url = urlparse.urlunparse((
                 mirror.scheme,
                 mirror.netloc,
@@ -46,6 +47,7 @@ def getNextMirror(type, path):
 
     if fileExists:
         # All is well, return this mirror.
+        MirrorHits.increment(str(mirror.key()))
         logging.debug("%s HAS %s/%s" % (mirror.ip, type, path))
         return urlparse.urlparse(mirror.url)
     else:

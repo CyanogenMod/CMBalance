@@ -14,11 +14,11 @@
 				<th>Type</th>
 				<th>Filename</th>
 				<th>Size</th>
-				<th>Date Added <img src="/static/icons/bullet_arrow_down.png" alt="" /></th>
+				<th>Build Date <img src="/static/icons/bullet_arrow_down.png" alt="" /></th>
 			</tr>
 			{% for file in files %}
 			<tr>
-				<td>{{ file.device|escape }}</td>
+				<td><a href="/?device={{ file.device }}">{{ file.device|escape }}</a></td>
 				<td>{{ file.type|escape }}</td>
 				<td>
                     <a href="{{ file.tickle_url }}">

@@ -37,8 +37,10 @@ class Server(object):
         path = os.path.join(self.paths[type], path)
 
         if os.path.exists(path):
+            print "%s exists" % (path)
             return True
         else:
+            print "%s does not exist" % (path)
             return False
 
 def loop():
