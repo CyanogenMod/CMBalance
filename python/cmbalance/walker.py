@@ -11,7 +11,7 @@ def walk():
     builds = []
 
     path = os.walk(PATH)
-    for root, dirs, files in path:
+    for root, dirs, files in path: #@UnusedVariable
         for name in files:
             if RE_ZIP.match(name):
                 fn = os.path.join(root, name)

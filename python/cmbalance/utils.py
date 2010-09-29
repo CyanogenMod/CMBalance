@@ -1,8 +1,13 @@
+from SimpleXMLRPCServer import SimpleXMLRPCServer
+from SocketServer import ThreadingMixIn
 import os.path
 import re
 import zipfile
 
 RE_BUILDPROP = re.compile(r'^(.*)=(.*)$')
+
+class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
+    """ threaded server """
 
 class AndroidBuild(object):
     def __init__(self, file):

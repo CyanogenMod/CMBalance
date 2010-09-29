@@ -5,15 +5,15 @@ __version__ = "1.0.0"
 
 setup(
       name="CMBalanceClient",
-      description="",
+      description="A python client for the CMBalance server.",
       long_description="",
       version=__version__,
 
       classifiers=[],
       keywords="",
-      author="",
-      author_email="",
-      url="",
+      author="Chris Soyars",
+      author_email="ctso@ctso.me",
+      url="http://www.github.com/ctso/CMBalance",
       license="",
 
       packages=find_packages('python'),
@@ -28,4 +28,4 @@ setup(
           ],
       },
       test_suite="nose.collector",
-      )
+)
