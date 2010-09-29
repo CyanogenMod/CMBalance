@@ -4,11 +4,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model.mirrors import Mirror
 from pages.base import BasePage
-from utils.xmlrpc import GAEXMLRPCTransport
 import datetime
-import logging
 import re
-import xmlrpclib
 
 class TasksPage(BasePage):
     def _notify_mirrors(self):
@@ -26,12 +23,7 @@ class TasksPage(BasePage):
         self.response.out.write("Done!")
 
     def _notify_python_mirror(self):
-        ip = self.request.get('ip')
-        try:
-            s = xmlrpclib.ServerProxy("http://%s:49150" % ip, GAEXMLRPCTransport())
-            s.sync()
-        except:
-            pass
+        self.response.out.write('done')
 
     def get(self):
         match = re.match("^/tasks/(.*)", self.request.path)
@@ -55,7 +47,7 @@ class PingMirrors(webapp.RequestHandler):
         for mirror in mirrors:
             params = {
                 'key': mirror.key(),
-                'ip': mirror.ip,
+                'url': mirror.url,
                 'control_type': mirror.control_type,
             }
             taskqueue.add(url='/tasks/ping_mirrors', params=params)
@@ -63,19 +55,17 @@ class PingMirrors(webapp.RequestHandler):
         self.response.out.write("done")
 
     def post(self):
-        ip = self.request.get('ip')
+        url = self.request.get('url')
         key = self.request.get('key')
         control_type = self.request.get('control_type')
 
         if control_type == "python":
-            return self._python_ping(key, ip)
+            return self._python_ping(key, url)
 
-    def _python_ping(self, key, ip):
-        online = False
-
-        rpc_server = xmlrpclib.ServerProxy("http://%s:49150" % ip, GAEXMLRPCTransport())
-        result = rpc_server.ping()
-        if result == "pong":
+    def _python_ping(self, key, url):
+        url = url + "/ping.html"
+        result = urlfetch.fetch(url)
+        if result.status_code == 200:
             online = True
         else:
             online = False

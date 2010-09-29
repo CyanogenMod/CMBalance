@@ -5,7 +5,6 @@ from model.mirrors import Mirror, MirrorHits
 import logging
 import os.path
 import urlparse
-import xmlrpclib
 
 def getDownloadURL(device, filename):
     file = memcache.get("file_%s_%s" % (device, filename))
@@ -39,11 +38,7 @@ def getNextMirror(type, path):
     mirror = Mirror.get(mirror_hits[0][1])
 
     # Make sure the mirror has the requested file.
-    try:
-        s = xmlrpclib.ServerProxy("http://%s:49150" % mirror.ip, GAEXMLRPCTransport())
-        fileExists = s.fileExists(type, path)
-    except:
-        fileExists = False
+    fileExists = True
 
     if fileExists:
         # All is well, return this mirror.
