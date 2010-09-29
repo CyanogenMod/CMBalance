@@ -4,29 +4,24 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /stats
-  script: pages/stats.py
-
-- url: /admin|/admin/.*\.html
-  script: pages/admin.py
-  
-- url: /rpc
-  script: pages/rpc.py
-  
-- url: /
-  script: pages/browse.py
-  
 - url: /get/.*
   script: pages/get.py
   
 - url: /mirrors
   script: pages/mirrors.py
   
-- url: /static
-  static_dir: static
-  
-- url: /tasks/.*
-  script: pages/tasks.py
-
 - url: /rommanager
   script: pages/get.py
+  
+- url: /rpc
+  script: pages/rpc.py
+  
+- url: /static
+  static_dir: static
+
+- url: /tasks/.*
+  script: pages/tasks.py
+  login: admin
+  
+- url: /
+  script: pages/browse.py
