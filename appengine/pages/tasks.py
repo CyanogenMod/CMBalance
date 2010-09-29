@@ -4,6 +4,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from model.mirrors import Mirror
 from pages.base import BasePage
 import datetime
+import logging
 import re
 import xmlrpclib
 
@@ -71,11 +72,13 @@ class PingMirrors(webapp.RequestHandler):
         s = xmlrpclib.Server("http://%s:49150" % ip)
         try:
             pong = s.ping()
+            logging.debug("PONG: Got '%s' from %s" % (pong, ip))
             if pong == "pong":
                 online = True
             else:
                 online = False
-        except:
+        except Exception, e:
+            logging.debug("PONG: Got Exception: %s" % (e))
             online = False
 
         # Update Mirror
