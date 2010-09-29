@@ -8,6 +8,17 @@ class BrowsePage(BasePage):
     def get(self):
         return self._handlePage("index")
 
+    def _make_webconnect(self, file):
+        querystring = {
+            'data.url': "http://mirror.teamdouche.net/get/%s/%s" % (file.device, file.filename),
+            'data.name': file.filename,
+            'success_redirect': 'http://mirror.teamdouche.net/rommanager?success=true',
+            'failure_redirect': 'http://mirror.teamdouche.net/rommanager?success=false',
+            'applicationId': 'ROM Manager',
+        }
+        url = 'https://tickleservice.appspot.com/authorizedtickle?%s' % urllib.urlencode(querystring)
+        return url
+
     def index(self):
         type = self.request.get('type', None)
         device = self.request.get('device', None)
@@ -30,9 +41,13 @@ class BrowsePage(BasePage):
         if device and type:
             title = "Browse Files - %s / %s" % (device, type)
 
+        files = files.order('-date_created').fetch(limit=30)
+        for file in files:
+            file.tickle_url = self._make_webconnect(file)
+
         values = self.values
         values.update({
-            'files': files.order('-date_created').fetch(limit=30),
+            'files': files,
             'title': title,
             'link_nightly': "/?" + urllib.urlencode(link_nightly),
             'link_stable': "/?" + urllib.urlencode(link_stable),

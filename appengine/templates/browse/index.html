@@ -21,7 +21,9 @@
 				<td>{{ file.device|escape }}</td>
 				<td>{{ file.type|escape }}</td>
 				<td>
-                    <img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
+                    <a href="{{ file.tickle_url }}">
+                        <img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
+                    </a>
 					<a href="/get/{{ file.device }}/{{ file.filename }}" style="padding-right: 10px;">{{ file.filename }}</a>
 				</td>
 				<td>{{ file.size|filesizeformat }}</td>
