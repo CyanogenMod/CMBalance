@@ -61,10 +61,13 @@ class RPCHandler(BasePage):
         try:
             file = File.check(**values)
             file.put()
+            sync = True
         except DuplicateRecordException:
+            sync = False
             self._invalidRequest()
 
-        taskqueue.add(url='/tasks/notify_mirrors', method='get')
+        if sync:
+            taskqueue.add(url='/tasks/notify_mirrors', method='get')
 
     def addMirror(self):
         values = {
