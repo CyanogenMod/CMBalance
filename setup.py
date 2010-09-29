@@ -22,5 +22,10 @@ setup(
       include_package_data=True,
       zip_safe=True,
       install_requires=[],
+      entry_points={
+          'console_scripts': [
+              'cmbalance = cmbalance.shell:main',
+          ],
+      },
       test_suite="nose.collector",
       )
