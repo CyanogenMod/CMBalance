@@ -6,7 +6,7 @@ import re
 
 class BasePage(webapp.RequestHandler):
     values = {
-        'devices': ['bravo', 'dream_sapphire', 'espresso', 'hero', 'heroc', 'inc', 'liberty', 'passion', 'sholes', 'supersonic', 'various'],
+        'devices': ['bravo', 'dream_sapphire', 'espresso', 'hero', 'heroc', 'inc', 'liberty', 'legend', 'passion', 'sholes', 'supersonic', 'various'],
         'types': ['stable', 'nightly', 'gapps'],
     }
 
