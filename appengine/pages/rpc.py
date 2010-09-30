@@ -52,11 +52,16 @@ class RPCHandler(BasePage):
             'path': self.request.get('path', None),
             'date_created': datetime.datetime.fromtimestamp(float(self.request.get('date_created', None))),
             'size': int(self.request.get('size', None)),
+            'buildnumber': int(self.request.get('buildnumber', -1)),
+            'md5sum': self.request.get('md5sum', None),
         }
 
         for value in values.itervalues():
             if value is None:
                 return self._invalidRequest()
+
+        if values['buildnumber'] == -1:
+            values['buildnumber'] = None
 
         try:
             file = File.check(**values)

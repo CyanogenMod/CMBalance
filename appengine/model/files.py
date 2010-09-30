@@ -8,6 +8,8 @@ class File(BaseModel):
     filename = db.StringProperty()
     path = db.StringProperty()
     size = db.IntegerProperty()
+    buildnumber = db.IntegerProperty()
+    md5sum = db.StringProperty()
     date_created = db.DateTimeProperty(auto_now_add=True)
 
     @classmethod

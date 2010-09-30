@@ -88,3 +88,7 @@ div#table table tr td img {
 div#table table tr th img {
 	vertical-align: text-bottom;
 }
+
+div#table table tr td small.md5 {
+        padding-left: 24px;
+}

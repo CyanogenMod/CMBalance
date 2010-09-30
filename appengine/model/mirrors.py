@@ -10,6 +10,7 @@ class Mirror(BaseModel):
     control_type = db.StringProperty(required=True)
     enabled = db.BooleanProperty(required=True, default=True)
     status = db.StringProperty()
+    location = db.StringProperty()
     last_seen = db.DateTimeProperty()
     date_added = db.DateTimeProperty(auto_now_add=True)
 

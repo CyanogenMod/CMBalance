@@ -2,7 +2,7 @@
 
 {% block content %}
 {% include "../nav.html" %}
-<div class="span-18">
+<div class="span-19">
 	<div id="table">
 		<h3>{{ title }}</h3>
 		<div id="subnav">
@@ -15,19 +15,21 @@
 				<th>Filename</th>
 				<th>Size</th>
 				<th>Build Date <img src="/static/icons/bullet_arrow_down.png" alt="" /></th>
+                                <th>Build #</th>
 			</tr>
 			{% for file in files %}
 			<tr>
 				<td><a href="/?device={{ file.device }}">{{ file.device|escape }}</a></td>
 				<td>{{ file.type|escape }}</td>
 				<td>
-                    <a href="{{ file.tickle_url }}">
+                               <a href="{{ file.tickle_url }}">
                         <img src="/static/icons/rommanager.png" alt="Send to ROMManager"/>
                     </a>
-					<a href="/get/{{ file.device }}/{{ file.filename }}" style="padding-right: 10px;">{{ file.filename }}</a>
+					<a href="/get/{{ file.device }}/{{ file.filename }}" style="padding-right: 10px;">{{ file.filename }}</a><br/><small class="md5">md5sum: {{ file.md5sum }}</small>
 				</td>
-				<td>{{ file.size|filesizeformat }}</td>
-				<td>{{ file.date_created }}</td>
+				<td><small>{{ file.size|filesizeformat }}</small></td>
+				<td><small>{{ file.date_created }}</small></td>
+                                <td><small>{{ file.buildnumber }}</small></td>
 			</tr>
 			{% endfor %}
 		</table>
