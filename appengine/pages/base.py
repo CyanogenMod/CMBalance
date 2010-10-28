@@ -6,8 +6,8 @@ import re
 
 class BasePage(webapp.RequestHandler):
     values = {
-        'devices': ['bravo', 'dream_sapphire', 'espresso', 'hero', 'heroc', 'inc', 'liberty', 'legend', 'passion', 'sholes', 'supersonic', 'various'],
-        'types': ['stable', 'nightly', 'gapps'],
+        'devices': ['bravo', 'bravoc', 'buzz', 'dream_sapphire', 'espresso', 'hero', 'heroc', 'inc', 'liberty', 'legend', 'passion', 'sholes', 'supersonic', 'various'],
+        'types': ['stable', 'nightly', 'RC'],
     }
 
     def _denyAccess(self):

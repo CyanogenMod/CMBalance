@@ -14,11 +14,11 @@ class GetPage(BasePage):
             return self._invalidRequest()
 
         url = getDownloadURL(device, filename)
-        self.redirect(url, True)
+        self.redirect(url)
 
 class TicklePage(BasePage):
     def get(self):
-        self.redirect('/', True)
+        self.redirect('/')
 
 routes = [
     ('^/get/.*$', GetPage),
