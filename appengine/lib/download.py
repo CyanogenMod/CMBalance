@@ -27,42 +27,7 @@ def getDownloadURL(device, filename):
     return url
 
 def getNextMirror(path):
-    mirror_hits = generateMirrorHits()
-    mirror_hits.sort()
-
-    # Update hit count.
-    mirror_hits[0][0] += 1
-    memcache.set('mirror_hits', mirror_hits, 3600)
-
-    # Load mirror object.
-    mirror = Mirror.get(mirror_hits[0][1])
-
-    # Make sure the mirror has the requested file.
-    url = mirror.url + "/cmbalance.php?action=fileExists&file=%s" % path
-    logging.debug("Asking  %s" % url)
-    result = urlfetch.fetch(url)
-    if result.status_code == 200:
-        fileExists = True
-        if mirror.status != "online":
-            mirror.status = "online"
-            mirror.put()
-    else:
-        fileExists = False
-        if mirror.status != "sync":
-            mirror.status = "sync"
-            mirror.put()
-
-    if fileExists:
-        # All is well, return this mirror.
-        MirrorHits.increment(str(mirror.key()))
-        logging.debug("%s HAS %s" % (mirror.ip, path))
-        return urlparse.urlparse(mirror.url)
-    else:
-        # Mirror says it doesn't have the file!
-        # Tell them all to sync, and move to the next mirror.
-        logging.debug("%s does not have %s!" % (mirror.ip, path))
-        taskqueue.add(url='/tasks/notify_mirrors', method='get')
-        return getNextMirror(path)
+        return urlparse.urlparse("http://mirror.kanged.net/")
 
 def generateMirrorHits():
     mirror_hits = memcache.get('mirror_hits')
