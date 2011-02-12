@@ -49,7 +49,7 @@ class BasePage(webapp.RequestHandler):
         tpl = self._getTemplate()
 
         content = template.render(tpl, values)
-        content = content.replace('\n', '')
-        content = content.replace('\t', '')
+        #content = content.replace('\n', '')
+        #content = content.replace('\t', '')
 
         self.response.out.write(content)
