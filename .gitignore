@@ -4,3 +4,4 @@ CMBalance.egg-info/*
 .pydevproject
 build/*
 dist/*
+*.db

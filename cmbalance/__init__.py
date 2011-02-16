@@ -1,7 +1,16 @@
-from pyramid.config import Configurator
+from cmbalance.database import init_database
 from cmbalance.resources import Root
+from pyramid.config import Configurator
+from sqlalchemy.engine import engine_from_config
 
 def main(global_config, **settings):
+
+    # Load engine from config.
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    engine.echo = True
+
+    # Initialize Database
+    init_database(engine)
 
     # App Configuration
     config = Configurator(root_factory=Root, settings=settings)
