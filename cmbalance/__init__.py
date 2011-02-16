@@ -10,7 +10,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'cmbalance:static')
 
     # Scan for view_config decorators.
-    config.scan('views')
+    config.scan('cmbalance.views')
 
     # Return the generated WSGI application.
     return config.make_wsgi_app()
