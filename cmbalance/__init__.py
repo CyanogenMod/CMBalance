@@ -2,12 +2,16 @@ from pyramid.config import Configurator
 from cmbalance.resources import Root
 
 def main(global_config, **settings):
-    """ This function returns a Pyramid WSGI application.
-    """
+
+    # App Configuration
     config = Configurator(root_factory=Root, settings=settings)
-    config.add_view('cmbalance.views.my_view',
-                    context='cmbalance:resources.Root',
-                    renderer='cmbalance:templates/mytemplate.pt')
+
+    # Add static content view.
     config.add_static_view('static', 'cmbalance:static')
+
+    # Scan for view_config decorators.
+    config.scan('views')
+
+    # Return the generated WSGI application.
     return config.make_wsgi_app()
 

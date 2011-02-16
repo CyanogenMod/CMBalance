@@ -2,3 +2,5 @@ CMBalance.egg-info/*
 *.pyc
 .project
 .pydevproject
+build/*
+dist/*
