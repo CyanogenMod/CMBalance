@@ -19,7 +19,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 </div>
 	<div id="table">
-		<h3>{{ title }}</h3>
+		<h3>{{ title|escape }}</h3>
 		<div id="subnav">
 			<b>Show Only:</b> [ <a href="{{ link_stable }}">stable</a> | <a href="{{ link_nightly }}">nightly</a> ]
 		</div>
