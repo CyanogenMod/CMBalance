@@ -1,2 +1,4 @@
 CMBalance.egg-info/*
 *.pyc
+.project
+.pydevproject
