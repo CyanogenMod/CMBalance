@@ -15,7 +15,6 @@ def browse(request):
 def download(context, request):
     try:
         url = "http://mirror.kanged.net/%s" % context.file_obj.full_path
-        print "Redirecting to '%s'" % url
         return HTTPFound(location=url)
     except:
         return HTTPNotFound()
