@@ -34,9 +34,11 @@
                 % for device in devices:
                 <li class="bullet"><a href="/?device=${device.name}">${device.name}</a></li>
                 % endfor
+                <%doc>
                 <li class="break">Mirrors</li>
                 <li class="bullet"><a href="/mirrors/list">list</a></li>
                 <li class="bullet"><a href="/mirrors/become">become a mirror</a></li>
+                </%doc>
             </ul>
         </nav>
         <section id="container">
