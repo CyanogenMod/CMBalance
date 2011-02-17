@@ -25,7 +25,17 @@
             </ul>
         </nav>
         <section id="container">
-            <img src="https://www.google.com/adsense/static/en_US/images/leaderboard.gif">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4305693279235670";
+/* TeamDouche Mirror */
+google_ad_slot = "5118872808";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script> 
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script> 
             <br/><br/>
             ${next.body()}
         </section>
