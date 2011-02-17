@@ -2,41 +2,53 @@
 
 body {
     background: url('/static/page_bg.png') repeat-x;
-    font-size: 75%;
-    font-family: Helvetica, Arial, sans-serif;
+    width: 1038px;
+    margin: 0 auto;
 }
 
-div#logo {
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 1em;
+}
+
+header#logo {
     padding: 10px;
 }
 
-div#navigation {
-    background: #fcfcfc;
+nav {
+    width: 138px;
+    margin-left: 10px;
     border: 1px solid #d9d9d9;
-    
+    /* actual width = 150px; */
+    background: #fcfcfc;
+    float: left;
     font-weight: bold;
     color: #000000;
-    width: 160px;
-    margin-left: 10px;
-    
-    float: left;
 }
 
-div#navigation a {
+nav a {
     font-weight: bold;
     color: #3DACB3;
     text-decoration: none;
 }
 
-div#navigation a:hover {
+nav a:hover {
     color: #000000;
 }
 
-div#navigation ul li {
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
     padding: 5px;
 }
 
-div#navigation ul li.break {
+nav ul li.break {
     margin: 10px 0 5px 0;
     padding: 7px 0px 7px 7px;
     border-top: 1px solid #D9D9D9;
@@ -46,10 +58,10 @@ div#navigation ul li.break {
     background: #EDF9F9;
 }
 
-div#navigation ul li.bullet {
+nav ul li.bullet {
     background: url('/static/bullet_black.png') no-repeat left;
     padding: 0 0 0 20px;
-    margin: 6px 0 6px 4px;
+    margin: 4px 0 4px 4px;
 }
 
 div#subnav {
@@ -61,7 +73,55 @@ div#subnav a {
     text-decoration: none;  
 }
 
-div#container {
-    margin-left: 170px;
-    padding: 10px;
+section#container {
+    float: left;
+    width: 728px;
+    padding: 20px;
+    /* actual width = 768px */
+}
+
+tbody tr:nth-child(even) td, tbody tr.even td { background: #f7f7f7;}
+tbody tr:nth-child(odd) td, tbody tr.odd td { background: #DDE0D5;}
+table {
+    border-collapse: seperate;
+    border-spacing: 0;
+    border:1px solid #DDE0D5;
+    width: 100%;
+}
+
+table tr th {
+    background-color: #3DACB3;
+    font-size: 95%;
+    text-align: left;
+    padding: 4px 10px 4px 5px;
+    font-weight: bold;
+}
+
+table tr td {
+    padding: 4px 10px 4px 5px;
+    vertical-align: middle;
+}
+
+table tr td a {
+    text-decoration: none;
+}
+
+table tr td img {
+    padding-right: 5px;
+    vertical-align: text-bottom;
+}
+
+table tr th img {
+    vertical-align: text-bottom;
+}
+
+table tr td small.md5 {
+    padding: 0 0 0 25px;
+}
+
+aside {
+    width: 120px;
+    /* actual width = 120px */
+    float: left;
+    margin-top: 120px;
 }
