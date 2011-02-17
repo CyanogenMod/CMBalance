@@ -36,6 +36,9 @@ class File(Base):
             except NoResultFound:
                 file = None
 
+            session.close()
+            DBSession.remove()
+
             return file
 
         file_cache = cache.get_cache('file', expire=60)
@@ -61,6 +64,9 @@ class File(Base):
             # Limit the query and order it
             query = query.order_by(desc(cls.date_created))[:20]
 
+            session.close()
+            DBSession.remove()
+
             return query
 
         return browse_cache.get(cache_key, createfunc=get_from_database)
@@ -83,6 +89,9 @@ class Device(Base):
         except:
             device = None
 
+        session.close()
+        DBSession.remove()
+
         return device
 
     @classmethod
@@ -93,6 +102,9 @@ class Device(Base):
                 devices = session.query(cls).order_by(cls.name).all()
             except:
                 devices = None
+
+            session.close()
+            DBSession.remove()
 
             return devices
 
