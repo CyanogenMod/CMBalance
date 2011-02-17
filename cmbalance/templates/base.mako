@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>CyanogenMod Mirror Network - Powered by TDRevolution</title>
         <link rel="stylesheet" type="text/css" href="/static/core.css" />
         <script type="text/javascript"> 
  
