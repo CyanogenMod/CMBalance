@@ -15,16 +15,21 @@ def browse(request):
 
 @view_config(context=DownloadContext, renderer='interstitial.mako')
 def download(context, request):
+    # The following domains are allowed to directly link to us.
     VALID_REFERERS = ["mirror.cyanogenmod.com",
                       "mirror.teamdouche.net",
                       "download.cyanogenmod.com",
                       "localhost:6543"]
-    referer = urlparse.urlparse(request.headers['Referer'])
-    if referer.netloc not in VALID_REFERERS:
-        return {'request_path': request.path, 'request_filename': os.path.basename(request.path)}
+
+    # Pull referer from http headers.
+    referer = request.headers.get('Referer', None)
+
+    # Check that the referring domain is allowed.
+    if referer and urlparse.urlparse(referer).netloc not in VALID_REFERERS:
+        return {'request_path': request.path,
+                'request_filename': os.path.basename(request.path)}
+    elif getattr(context, 'file_obj', None):
+        url = "http://mirror.kanged.net/%s" % context.file_obj.full_path
+        return HTTPFound(location=url)
     else:
-        try:
-            url = "http://mirror.kanged.net/%s" % context.file_obj.full_path
-            return HTTPFound(location=url)
-        except:
-            return HTTPNotFound()
+        return HTTPNotFound()
