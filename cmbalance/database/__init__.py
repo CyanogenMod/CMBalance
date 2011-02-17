@@ -36,6 +36,3 @@ def init_database(engine):
         populate_data()
     except IntegrityError:
         DBSession.rollback()
-
-    # Give the session back.
-    DBSession.remove()
