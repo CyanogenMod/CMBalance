@@ -62,10 +62,10 @@
             <section>
                 Bandwidth is not cheap!<br/><br/>
                 Thankfully the guys over at 
-                <a href="http://tdrevolution.com/whmcs/link.php?id-7"  target="_blank">TDRevolution</a> 
+                <a href="http://tdrevolution.com/whmcs/link.php?id=7"  target="_blank">TDRevolution</a> 
                 donate the bandwidth we need to make your download painless.
                 <br/><br/>
-                You should consider <a href="http://tdrevolution.com/whmcs/link.php?id-7" target="_blank">Checking them out!</a>
+                You should consider <a href="http://tdrevolution.com/whmcs/link.php?id=7" target="_blank">Checking them out!</a>
             </section>
             <section id="download">
                 <a href="${request_path}">Download ${request_filename}</a>
