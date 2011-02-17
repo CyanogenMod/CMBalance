@@ -30,7 +30,9 @@
             ${next.body()}
         </section>
         <aside>
-            <img src="/static/tdr_skyscraper.png">
+            <a href="http://tdrevolution.com/whmcs/link.php?id=7" target="_new">
+                <img src="/static/tdr_skyscraper.png">
+            </a>
         </aside>
     </body>
 </html>
