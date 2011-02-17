@@ -42,7 +42,7 @@
     % for file in files:
     <% device=file.device.name %>
     <tr>
-        <td><a href="${device_link(device)}">${file.device.name|h}</td>
+        <td><a href="${device_link(device)}">${file.device.name|h}</a></td>
         <td>${file.type}</td>
         <td>
             <img src="/static/rommanager.png" alt="Send to ROMManager"/>

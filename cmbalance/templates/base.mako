@@ -54,7 +54,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
             ${next.body()}
         </section>
         <aside>
-            <a href="http://tdrevolution.com/whmcs/link.php?id=7" target="_new">
+            <a href="http://tdrevolution.com/whmcs/link.php?id=7" target="_blank">
                 <img src="/static/tdr_skyscraper.png">
             </a>
         </aside>
