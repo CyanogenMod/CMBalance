@@ -11,7 +11,7 @@ class File(Base):
     __tablename__ = "files"
 
     id = Column('id', Integer, primary_key=True)
-    filename = Column('filename', String(255), index=True)
+    filename = Column('filename', String(255), unique=True)
     size = Column('size', Integer)
     full_path = Column('full_path', String(255))
     md5sum = Column('md5sum', String(32))
