@@ -1,3 +1,4 @@
+from cmbalance.cache import cache
 from cmbalance.database import init_database
 from cmbalance.resources import Root
 from pyramid.config import Configurator

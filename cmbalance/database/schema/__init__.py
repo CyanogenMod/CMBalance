@@ -1,6 +1,8 @@
+from cmbalance import cache
 from cmbalance.database import Base, DBSession
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relation
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import func
 
 class File(Base):
@@ -16,6 +18,21 @@ class File(Base):
 
     date_created = Column(DateTime, default=func.now())
     date_updated = Column(DateTime, default=func.now(), onupdate=func.now())
+
+    @classmethod
+    def get_by_filename(cls, filename):
+        def get_from_database():
+            session = DBSession()
+            try:
+                file = session.query(cls).filter(cls.filename == filename).one()
+            except NoResultFound:
+                file = None
+
+            return file
+
+        file_cache = cache.get_cache('file', expire=60)
+        file = file_cache.get(filename, createfunc=get_from_database)
+        return file
 
 class Device(Base):
     __tablename__ = "devices"
