@@ -3,10 +3,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker
-from zope.sqlalchemy import ZopeTransactionExtension
-import transaction
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+DBSession = scoped_session(sessionmaker())
 Base = declarative_base(cls=AbstractTable)
 
 def populate_data():
@@ -18,7 +16,7 @@ def populate_data():
         device_obj = Device(name=device)
         session.add(device_obj)
 
-    transaction.commit()
+    session.close()
 
 def init_database(engine):
     DBSession.configure(bind=engine)
