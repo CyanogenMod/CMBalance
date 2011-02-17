@@ -1,0 +1,67 @@
+@import url('/static/reset.css');
+
+body {
+    background: url('/static/page_bg.png') repeat-x;
+    font-size: 75%;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+div#logo {
+    padding: 10px;
+}
+
+div#navigation {
+    background: #fcfcfc;
+    border: 1px solid #d9d9d9;
+    
+    font-weight: bold;
+    color: #000000;
+    width: 160px;
+    margin-left: 10px;
+    
+    float: left;
+}
+
+div#navigation a {
+    font-weight: bold;
+    color: #3DACB3;
+    text-decoration: none;
+}
+
+div#navigation a:hover {
+    color: #000000;
+}
+
+div#navigation ul li {
+    padding: 5px;
+}
+
+div#navigation ul li.break {
+    margin: 10px 0 5px 0;
+    padding: 7px 0px 7px 7px;
+    border-top: 1px solid #D9D9D9;
+    border-bottom: 1px solid #D9D9D9;
+    font-size: 95%;
+    /*background: #F7F7F7;*/
+    background: #EDF9F9;
+}
+
+div#navigation ul li.bullet {
+    background: url('/static/bullet_black.png') no-repeat left;
+    padding: 0 0 0 20px;
+    margin: 6px 0 6px 4px;
+}
+
+div#subnav {
+    font-size: 90%;
+    margin-bottom: 5px;
+}
+
+div#subnav a {
+    text-decoration: none;  
+}
+
+div#container {
+    margin-left: 170px;
+    padding: 10px;
+}

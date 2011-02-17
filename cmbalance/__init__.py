@@ -8,7 +8,6 @@ def main(global_config, **settings):
 
     # Setup engine.
     engine = engine_from_config(settings, 'sqlalchemy.')
-    engine.echo = True
     init_database(engine)
 
     # App Configuration

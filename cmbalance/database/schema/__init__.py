@@ -38,10 +38,9 @@ class Device(Base):
     __tablename__ = "devices"
 
     id = Column('id', Integer, primary_key=True)
-    name = Column('name', String(50), index=True)
+    name = Column('name', String(50), unique=True)
 
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, name):
         self.name = name
 
     @classmethod
@@ -54,3 +53,17 @@ class Device(Base):
             device = None
 
         return device
+
+    @classmethod
+    def get_all(cls):
+        def get_from_database():
+            session = DBSession()
+            try:
+                devices = session.query(cls).order_by(cls.name).all()
+            except:
+                devices = None
+
+            return devices
+
+        devices_cache = cache.get_cache('all', expire=3600)
+        return devices_cache.get('all', createfunc=get_from_database)

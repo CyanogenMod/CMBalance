@@ -11,9 +11,10 @@ def populate_data():
     from cmbalance.database.schema import Device, File
     session = DBSession()
 
-    # Create a device entry.
-    passion = Device(id=1, name='passion')
-    session.add(passion)
+    # Create devices.
+    for device in ["ace", "buzz", "bravo", "bravoc", "dream_sapphire", "espresso", "hero", "heroc", "inc", "liberty", "legend", "passion", "sholes", "supersonic", "one", "z71", "crespo", "glacier", "vision"]:
+        device_obj = Device(name=device)
+        session.add(device_obj)
 
     # Create a file entry.
     file = File()
