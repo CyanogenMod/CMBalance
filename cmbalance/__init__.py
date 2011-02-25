@@ -15,6 +15,8 @@ class SessionFixMiddleware(object):
         session = DBSession()
         try:
             return self.app(environ, start_response)
+        except:
+            session.rollback()
         finally:
             session.close()
             DBSession.remove()
