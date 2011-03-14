@@ -2,17 +2,17 @@
 
 <%def name="device_link(device)">
     % if request_type is None:
-        /?device=${device}
+        /?device=${device|h}
     % else:
-        /?device=${device}&type=${request_type}
+        /?device=${device|h}&type=${request_type|h}
     % endif
 </%def>
 
 <%def name="filter_link(type)">
     % if request_device is None:
-        /?type=${type}
+        /?type=${type|h}
     % else:
-        /?type=${type}&device=${request_device}
+        /?type=${type|h}&device=${request_device|h}
     % endif
 </%def>
 
