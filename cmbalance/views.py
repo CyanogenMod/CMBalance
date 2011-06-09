@@ -29,7 +29,7 @@ def download(context, request):
         return {'request_path': request.path,
                 'request_filename': os.path.basename(request.path)}
     elif getattr(context, 'file_obj', None):
-        url = "http://mirror.kanged.net/%s" % context.file_obj.full_path
+        url = "http://mirrorbrain.cyanogenmod.com/cm/%s" % context.file_obj.full_path
         return HTTPFound(location=url)
     else:
         return HTTPNotFound()
