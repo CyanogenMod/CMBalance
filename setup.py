@@ -9,7 +9,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 requires = ['pyramid', 'WebError', 'SQLAlchemy', 'nose', 'pyramid_beaker', 'zope.sqlalchemy']
 
 setup(name='CMBalance',
-      version='0.15',
+      version='0.16',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
